@@ -15,7 +15,7 @@ def main(command):
     tts.save("command.mp3")
 
     # Convert command.mp3 to command.wav
-    os.system("ffmpeg -i command.mp3 -ar 441000 -ac 2 command.wav")
+    os.system("ffmpeg -i command.mp3 -ar 16000 -ac 1 -acodec pcm_s16le command.wav")
 
     # Make ssh request to amazon voice services
     # os.system("./request.sh")

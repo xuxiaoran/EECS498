@@ -27,6 +27,20 @@ def send_command(command):
     os.system("chmod aug+x auth_token.sh")
     os.system("./auth_token.sh")
 
-    # ^ Returns a JSON response containing access token and refresh token
+    # ^ Returns a JSON response containing access token and refresh token'''
 
-    os.system("./request.sh")'''
+    os.system("./request.sh")
+
+    response_file = open("response.txt", 'r')
+    response_text = response_file.read()
+    response_file.close() 
+
+    pos = response_text.find("ID3")
+    response_text = response_text[pos:]
+
+    spoken_response = open("response_audio.txt", 'w')
+    spoken_response.write(response_text)
+    spoken_response.close()
+
+    os.system("mv response_audio.txt response_audio.mp3")
+    os.system("afplay response_audio.mp3")

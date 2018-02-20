@@ -15,10 +15,21 @@ def main(command):
     tts.save("command.mp3")
 
     # Convert command.mp3 to command.wav
-    os.system("ffmpeg -i command.mp3 -ar 441000 -ac 2 command.wav")
+    os.system("ffmpeg -i command.mp3 -ar 16000 -ac 1 -acodec pcm_s16le command.wav")
 
-    # Make ssh request to amazon voice services
-    # os.system("./request.sh")
+    '''# Make ssh request to amazon voice services
+    os.system("chmod aug+x auth_code.sh")
+    os.system("./auth_code.sh")
+
+    # ^ Returns a link that requires Javier's login
+    # Once logged in, need to get code from leftover url link 
+
+    os.system("chmod aug+x auth_token.sh")
+    os.system("./auth_token.sh")
+
+    # ^ Returns a JSON response containing access token and refresh token
+
+    os.system("./request.sh")'''
 
 if __name__ == "__main__":
     main("What time is it")

@@ -3,7 +3,7 @@ import os
 import sys
 from gtts import gTTS
 
-def main(command):
+def send_command(command):
 
     # Remove old audio files
     os.system("rm command.mp3")
@@ -30,6 +30,3 @@ def main(command):
     # ^ Returns a JSON response containing access token and refresh token
 
     os.system("./request.sh")'''
-
-if __name__ == "__main__":
-    main("What time is it")

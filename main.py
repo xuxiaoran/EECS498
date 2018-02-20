@@ -1,4 +1,5 @@
 import sys, json, webbrowser
+from forwarding_file import send_command
 
 #Read command from front end
 def read_in():
@@ -16,7 +17,7 @@ def main():
     this is just to show that python can read from the front end
     CHANGE CODE BELOW
     '''
-    webbrowser.open('https://www.google.com/' + str(line))
+    send_command(line)
 
 
 if __name__ == '__main__':

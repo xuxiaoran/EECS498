@@ -1,3 +1,8 @@
+
+Backend dependencies:
+ffmpeg: "brew install ffmpeg"
+gtts: "pip install gTTS"
+
 How to Run:
 
 install node.js && npm first

@@ -5,9 +5,14 @@ gtts: "pip install gTTS"
 
 How to Run:
 
-install node.js && npm first
-then run:
+1. Check if node.js & npm are installed first, run:
+    node -v
+     npm -v
+
+2. If not installed, run: brew install node
+
+3. After installing node&npm, run:
   npm install electron -g
 
-after installation, at the project root directory, run:
+4. At the project root directory, run:
   electron .

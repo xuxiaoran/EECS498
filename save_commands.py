@@ -4,6 +4,7 @@ import sys
 import shutil
 import sqlite3
 
+# Saves the given command to the database
 def save_command(command):
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()
@@ -26,6 +27,7 @@ def retrieve_commands():
     conn.close()
     return dic
 
+# Deletes the command with the given command_id
 def delete_command(command_id):
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()

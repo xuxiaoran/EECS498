@@ -1,44 +1,21 @@
- <head>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="assets/css/jsKeyboard.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<head>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="assets/css/jsKeyboard.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/landing-page.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="assets/css/landing-page.css" rel="stylesheet">
 
-    <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/jquery-1.9.1.min.js"></script>
-    <script  src="assets/js/jsKeyboard.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        const shell = require('electron').shell;
-        const exLinksBtn = document.getElementById('run');
+  <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery-1.9.1.min.js"></script>
+  <script src="assets/js/jsKeyboard.js"></script>
+  <script src="assets/js/main.js"></script>
+</head>
 
-        exLinksBtn.addEventListener('click', function (event) {
-          var command = document.getElementById("command").value;
-          const spawn = require('child_process').spawn;
-          const scriptExecution = spawn("python", ["main.py"]);
-
-          // Handle normal output
-          scriptExecution.stdout.on('data', (data) => {
-            console.log(String.fromCharCode.apply(null, data));
-          });
-
-          // Write data (remember to send only strings or numbers, otherwhise python wont understand)
-          var data = JSON.stringify(command);
-          scriptExecution.stdin.write(data);
-          // End data write
-          scriptExecution.stdin.end();
-        })
-    </script>
-  </head>
-  
 <template class="task-template">
   <section id="command-section" class="section js-section u-category-teal">
-    <header class="section-header">
     <header class="section-wrapper masthead text-white text-center">
       <div class="container">
         <div class="row">
@@ -60,7 +37,27 @@
         </div>
         <div id="virtualKeyboard"></div>
       </div>
-    </div>
-  </header>
-  </section>
-</template>
+    </header>
+    <script>
+      const shell = require('electron').shell;
+      const exLinksBtn = document.getElementById('run');
+
+      exLinksBtn.addEventListener('click', function (event) {
+        var command = document.getElementById("command").value;
+        const spawn = require('child_process').spawn;
+        const scriptExecution = spawn("python", ["main.py"]);
+
+          // Handle normal output
+          scriptExecution.stdout.on('data', (data) => {
+            console.log(String.fromCharCode.apply(null, data));
+          });
+
+          // Write data (remember to send only strings or numbers, otherwhise python wont understand)
+          var data = JSON.stringify(command);
+          scriptExecution.stdin.write(data);
+          // End data write
+          scriptExecution.stdin.end();
+        })
+      </script>
+    </section>
+  </template>

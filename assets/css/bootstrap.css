@@ -2621,14 +2621,14 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #D84315;
-  border-color: #D84315;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }
 
 .btn-danger:hover {
   color: #fff;
-  background-color: #c82333;
-  border-color: #bd2130;
+  background-color: #c9302c;
+  border-color: #ac2925;
 }
 
 .btn-danger:focus, .btn-danger.focus {

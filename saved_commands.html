@@ -1,0 +1,41 @@
+<template class="task-template">
+  <section id="saved-section" class="section js-section u-category-green">
+    <header class="section-header">
+      <header class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
+          Saved Commands
+        </h1>
+      </header>
+
+      <div class="demo">
+        <div class="demo-wrapper">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-hover" id="commands">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="new" placeholder="Enter new command">
+                          </div>
+                        </td>
+                        <td>
+                          <button type="submit" id="add" class="btn btn-block btn-primary"> Add </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </header>
+
+    <script type="text/javascript">
+      require('./commands')
+    </script>
+  </section>
+</template>

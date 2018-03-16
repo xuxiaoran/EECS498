@@ -1,4 +1,18 @@
-const settings = require('electron-settings')
+const storage = require('electron-json-storage')
+
+// Default to the view that was active the last time the app was open
+storage.get('activeSectionButtonId', function (err, id) {
+  if (err) return console.error(err)
+
+  if (id && id.length) {
+    showMainContent()
+    const section = document.getElementById(id)
+    if (section) section.click()
+  } else {
+    activateDefaultSection()
+    displayAbout()
+  }
+})
 
 document.body.addEventListener('click', function (event) {
   if (event.target.dataset.section) {
@@ -22,7 +36,9 @@ function handleSectionTrigger (event) {
 
   // Save currently active button in localStorage
   const buttonId = event.target.getAttribute('id')
-  settings.set('activeSectionButtonId', buttonId)
+  storage.set('activeSectionButtonId', buttonId, function (err) {
+    if (err) return console.error(err)
+  })
 }
 
 function activateDefaultSection () {
@@ -62,15 +78,4 @@ function hideAllSectionsAndDeselectButtons () {
 
 function displayAbout () {
   document.querySelector('#about-modal').classList.add('is-shown')
-}
-
-// Default to the view that was active the last time the app was open
-const sectionId = settings.get('activeSectionButtonId')
-if (sectionId) {
-  showMainContent()
-  const section = document.getElementById(sectionId)
-  if (section) section.click()
-} else {
-  activateDefaultSection()
-  displayAbout()
 }

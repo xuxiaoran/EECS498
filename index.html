@@ -10,16 +10,18 @@
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/nativize.css">
   <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="assets/css/nav.css">
   <link rel="stylesheet" href="assets/css/section.css">
   <link rel="stylesheet" href="assets/css/demo.css">
+  <link rel="stylesheet" href="assets/css/sb-admin-2.css">
+
 
   <!-- BootStrap Stuff -->
   <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
 
   <link rel="import" href="command.html">
+  <link rel="import" href="saved_commands.html">
 
   <title>Better Butler</title>
 
@@ -49,8 +51,8 @@
 
     <div class="nav-item">
       <h5 class="nav-category"></h5>
-        <button type="button" id="button-menus" data-section="homestate" class="nav-button u-category-purple"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
-        Saved Home States</button>
+        <button type="button" id="button-menus" data-section="home_state" class="nav-button u-category-purple"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
+        Saved Home States (In Omega Release)</button>
     </div>
 
     <footer class="nav-footer">
@@ -62,10 +64,7 @@
 
   <script>
     require('./assets/imports')
-    require('./assets/ex-links')
     require('./assets/nav')
-    require('./assets/demo-btns')
-    require('./assets/code-blocks')
     require('./assets/normalize-shortcuts')
   </script>
 </body>

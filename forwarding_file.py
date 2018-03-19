@@ -2,6 +2,31 @@
 import os
 import sys
 from gtts import gTTS
+from amazonLogin import getCode
+
+def tokenRetrieval():
+    # Make ssh request to amazon voice services
+    os.system("chmod aug+x auth_code.sh")
+    os.system("./auth_code.sh")
+
+    getCode()
+
+    os.system("chmod aug+x auth_token.sh")
+    os.system("./auth_token.sh")
+
+    with open('token.txt', 'r') as tokenFile:
+        token = tokenFile.read()[1:-1]
+
+    with open('refresh_token.txt', 'r') as refreshTokenFile:
+        refresh_token = refreshTokenFile.read()[1:-1]
+
+    with open('token.txt', 'w') as outFile1:
+        outFile1.write(token)
+
+    with open('refresh_token.txt', 'w') as outFile2:
+        outFile2.write(refresh_token)
+
+    os.system("chmod aug+x request.sh")
 
 def send_command(command):
 
@@ -16,18 +41,6 @@ def send_command(command):
 
     # Convert command.mp3 to command.wav
     os.system("ffmpeg -i command.mp3 -ar 16000 -ac 1 -acodec pcm_s16le command.wav")
-
-    '''# Make ssh request to amazon voice services
-    os.system("chmod aug+x auth_code.sh")
-    os.system("./auth_code.sh")
-
-    # ^ Returns a link that requires Javier's login
-    # Once logged in, need to get code from leftover url link 
-
-    os.system("chmod aug+x auth_token.sh")
-    os.system("./auth_token.sh")
-
-    # ^ Returns a JSON response containing access token and refresh token'''
 
     os.system("./request.sh")
 

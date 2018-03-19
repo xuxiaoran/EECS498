@@ -1,4 +1,4 @@
-TOKEN="Atza|IQEBLjAsAhR..."
+TOKEN=$(<token.txt)
 
 curl -i \
   -H "Authorization: Bearer ${TOKEN}" \

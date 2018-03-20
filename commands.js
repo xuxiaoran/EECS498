@@ -21,10 +21,22 @@ function add_row(id, cmd){
 		row.parentNode.removeChild(row);
 	}
 
+	const run_cell = document.createElement('td');
+	const btn_run = document.createElement("button");
+	btn_run.type = "submit";
+	btn_run.className = 'btn btn-sm btn-success';
+	btn_run.innerHTML = 'Run';
+	btn_run.onclick = function () {
+		const child_delete = require('child_process');
+		const exec = child_delete.spawn('python', ['forwarding_file.py', cmd]);
+	}
+
 	cmd_cell.innerHTML = cmd;
 	btn_cell.appendChild(btn);
+	run_cell.appendChild(btn_run);
 	new_row.appendChild(cmd_cell);
 	new_row.appendChild(btn_cell);
+	new_row.appendChild(run_cell);
 	$('#commands').append(new_row);
 }
 

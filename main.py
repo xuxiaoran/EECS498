@@ -1,5 +1,15 @@
 import sys, json, webbrowser
 from forwarding_file import send_command
+import sched, time
+
+'''s = sched.scheduler(time.time, time.sleep)
+def newToken(sc): 
+    print "************ Refreshing Token ************"
+    refreshToken()
+    s.enter(3500, 1, newToken, (sc,))
+
+s.enter(3500, 1, newToken, (s,))
+s.run()'''        
 
 #Read command from front end
 def read_in():
@@ -18,7 +28,6 @@ def main():
     CHANGE CODE BELOW
     '''
     send_command(line)
-
 
 if __name__ == '__main__':
     main()

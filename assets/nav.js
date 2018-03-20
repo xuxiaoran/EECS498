@@ -42,7 +42,7 @@ function handleSectionTrigger (event) {
 }
 
 function activateDefaultSection () {
-  document.getElementById('button-windows').click()
+  document.getElementById('button-command').click()
 }
 
 function showMainContent () {
@@ -74,8 +74,4 @@ function hideAllSectionsAndDeselectButtons () {
   Array.prototype.forEach.call(buttons, function (button) {
     button.classList.remove('is-selected')
   })
-}
-
-function displayAbout () {
-  document.querySelector('#about-modal').classList.add('is-shown')
 }

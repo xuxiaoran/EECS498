@@ -29,6 +29,9 @@ function add_row(id, cmd){
 	btn_run.onclick = function () {
 		const child_delete = require('child_process');
 		const exec = child_delete.spawn('python', ['forwarding_file.py', cmd]);
+		exec.stdout.on('data', (data) => {
+            console.log(String.fromCharCode.apply(null, data));
+          });
 	}
 
 	cmd_cell.innerHTML = cmd;

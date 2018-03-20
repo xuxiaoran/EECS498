@@ -27,6 +27,8 @@ app.on('window-all-closed', () => {
     app.quit();
 });
 
+app.disableHardwareAcceleration();
+
 app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()

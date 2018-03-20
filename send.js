@@ -5,7 +5,7 @@ const exLinksBtn = document.getElementById('run');
 exLinksBtn.addEventListener('click', function (event) {
   var command = document.getElementById("command").value;
   const spawn = require('child_process').spawn;
-  const scriptExecution = spawn("python", ["test.py"]);
+  const scriptExecution = spawn("python", ["main.py"]);
 
           // Handle normal output
           scriptExecution.stdout.on('data', (data) => {

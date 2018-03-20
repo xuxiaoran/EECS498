@@ -20,6 +20,13 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null
   })
+
+  const spawn = require('child_process').spawn;
+  const scriptExecution = spawn("python", ["setToken.py"]);
+          // Handle normal output
+          scriptExecution.stdout.on('data', (data) => {
+            console.log(String.fromCharCode.apply(null, data));
+          });
 }
 
 app.on('ready', createWindow);

@@ -68,13 +68,6 @@
     require('./assets/normalize-shortcuts')
 
     const shell = require('electron').shell;
-    const spawn = require('child_process').spawn;
-    const scriptExecution = spawn("python", ["setToken.py"]);
-          // Handle normal output
-          scriptExecution.stdout.on('data', (data) => {
-            console.log(String.fromCharCode.apply(null, data));
-          });
-
     const exLinksBtn = document.getElementById('help');
     exLinksBtn.addEventListener('click', function (event) {
         const spawn = require('child_process').spawn;

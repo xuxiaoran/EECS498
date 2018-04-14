@@ -27,6 +27,8 @@ function createWindow () {
           scriptExecution.stdout.on('data', (data) => {
             console.log(String.fromCharCode.apply(null, data));
           });
+
+  //mainWindow.openDevTools();
 }
 
 app.on('ready', createWindow);

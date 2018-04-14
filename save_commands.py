@@ -4,6 +4,7 @@ import os, os.path
 import sys
 import shutil
 import sqlite3
+import webbrowser
 
 def output(msg):
     print(msg.encode('unicode-escape'))
@@ -50,6 +51,8 @@ def delete_command(command_id):
 
 # Edits the command with command_id to be input_string
 def edit_command(command_id, input_string):
+    #webbrowser.open('https://www.google.com/'+str(command_id)+ '+' + input_string)
+
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()
     edit_command = "UPDATE commands SET command = " + str(input_string) + " WHERE cid = " + int(command_id)
@@ -58,44 +61,60 @@ def edit_command(command_id, input_string):
     conn.close()
 
 
+
 # Saves compound commands
-# command_list is a string of comma-separated command ids, such as 1,2,3,4,5
-def save_compound_command(command_ids):
-    conn = sqlite3.connect('saved_commands.db')
-    db = conn.cursor()
-    db.execute("CREATE TABLE IF NOT EXISTS compound_commands (ccid integer primary key autoincrement, command_list)")
-    compound_command = ""
-    for cid in command_ids:
-        compound_command = compound_command + str(cid) + ","
-    insert_command = "INSERT INTO compound_commands (command_list) VALUES (\"" + compound_command + "\")"
-    db.execute(insert_command)
-    conn.commit()
-    conn.close()
+# commands_list is a list of textual commands
+def save_compound_command(commands_list):
+    num_file = open("num_file", "r")
+    pos = num_file.read()
+    num_file.close()
+    pos = int(pos)
+    pos+=1
+    num_file = open("num_file", "w")
+    num_file.write(str(pos))
+    num_file.close()
+
+    filename = "compound_command_" + str(pos)
+    command_file = open("filename", "w")
+    command_file.writelines(commands_list)
+    command_file.close()
 
 
-# Returns a list of lists of command_ids [[list of command ids][list of command ids][list of command ids][etc]]
-# On the front end, we'll need to match up this list of IDs with the data from retrieve_commands to 
-# put together what the actual compound commands looks like
-def retrieve_compound_commands():
-    conn = sqlite3.connect('saved_commands.db')
-    db = conn.cursor()
-    db.execute("CREATE TABLE IF NOT EXISTS compound_commands (ccid integer primary key autoincrement, command_list)")
-    db.execute("SELECT * FROM compound_commands")
-    data = db.fetchall()
-    dic = {}
-    for pair in data:
-        dic[str(pair[0])] = str(pair[1].split(","))
-    conn.commit()
-    conn.close()
-    for key, value in dic.items():
-        output(str(key+'%'+value))
+# Returns a list of lists of commands. The first thing in each list of commands is the id for that compound command
+def retrieve_compound_commands(compound_command_name):
+    commands_list = []
+    for possible_file in os.listdir("/"):
+        if possible_file.find("compound_command_") != -1:
+            pos = possible_file.replace("compound_command_", "")
+            command_file = open(possible_file, "r")
+            commands = command_file.readlines()
+            command_file.close()
+            commands.insert(0, pos)
+            commands_list.append(commands)
 
+    return commands_list
+
+
+def delete_compound_command(compound_command_id):
+    filename = "compound_command_" + str(compound_command_id)
+    os.remove(filename)
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         retrieve_commands()
+
     elif sys.argv[1] == 'add':
         save_command(sys.argv[2])
+
     elif sys.argv[1] == 'delete':
         delete_command(sys.argv[2])
+
+    elif sys.argv[1] == 'edit':
+        edit_command(sys.argv[2], sys.argv[3])
+
+    elif sys.argv[1] == 'rcompound':
+        retrieve_compound_commands()
+
+    elif sys.argv[1] == 'ncompound':
+        save_compound_command(sys.argv[2])

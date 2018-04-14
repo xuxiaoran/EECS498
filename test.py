@@ -1,4 +1,5 @@
 import sys, json, webbrowser
+import os, os.path
 
 #Read command from front end
 def read_in():
@@ -6,14 +7,14 @@ def read_in():
     return json.loads(lines[0])
 
 #do actual stuff here
-def main():
+def main(cmd1, cmd2):
 
     '''
     this is just to show that python can read from the front end
     CHANGE CODE BELOW
     '''
-    webbrowser.open('https://www.google.com/')
+    webbrowser.open('https://www.google.com/' + cmd1 + '/' + cmd2)
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[2], sys.argv[3])

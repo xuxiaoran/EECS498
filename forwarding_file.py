@@ -31,3 +31,6 @@ def send_command(command):
 
     os.system("mv response_audio.txt response_audio.mp3")
     os.system("afplay response_audio.mp3")
+
+if __name__ == '__main__':
+    main()

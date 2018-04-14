@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/nativize.css">
   <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="assets/css/nav.css">
   <link rel="stylesheet" href="assets/css/section.css">
   <link rel="stylesheet" href="assets/css/demo.css">
-  <link rel="stylesheet" href="assets/css/sb-admin-2.css">
-
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
 
   <!-- BootStrap Stuff -->
   <script>if (typeof module === 'object') {window.jQuery = window.$ = module.exports;};</script>
+  <script src="assets/js/jquery-1.9.1.min.js"></script>
 
   <link rel="import" href="command.html">
   <link rel="import" href="saved_commands.html">
+  <link rel="import" href="compound_commands.html">
 
   <title>Better Butler</title>
 
@@ -31,8 +27,8 @@
   
   <nav class="nav js-nav">
     <header class="nav-header">
-      <h1 class="nav-title">Better Butler<button type="submit" id="help" class="btn btn-ml btn-danger" style="float:right;"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
-        HELP!</button></h1>
+      <h2 class="nav-title">Better Butler<button type="submit" id="help" class="btn u-category-pink" style="float:right;"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
+        Emergency!</button></h2>
     </header>
 
     <div class="nav-item">
@@ -43,16 +39,14 @@
 
     <div class="nav-item">
       <h5 class="nav-category"></h5>
-        <button type="button" id="button-commands" data-section="saved" class="nav-button u-category-green"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
+        <button type="button" id="button-commands" data-section="saved" class="nav-button u-category-blue"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
         Saved Commands</button>
-      <!--button type="button" id="button-menus" data-section="menus" class="nav-button u-category-blue"></button>
-      <button type="button" id="button-menus" data-section="menus" class="nav-button u-category-purple"></button -->
     </div>
 
     <div class="nav-item">
       <h5 class="nav-category"></h5>
-        <button type="button" id="button-states" data-section="home_state" class="nav-button u-category-purple"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
-        Saved Home States (In Omega Release)</button>
+        <button type="button" id="button-states" data-section="compound" class="nav-button u-category-purple"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
+        Compound Commands</button>
     </div>
 
     <footer class="nav-footer">
@@ -65,6 +59,8 @@
   <script>
     require('./assets/imports')
     require('./assets/nav')
+    require('./assets/demo-btns')
+    require('./assets/code-blocks')
     require('./assets/normalize-shortcuts')
 
     const shell = require('electron').shell;

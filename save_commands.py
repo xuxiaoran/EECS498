@@ -79,7 +79,6 @@ def save_compound_command(commands_list):
     command_file.writelines(commands_list)
     command_file.close()
 
-
 # Returns a list of lists of commands. The first thing in each list of commands is the id for that compound command
 def retrieve_compound_commands(compound_command_name):
     commands_list = []
@@ -93,7 +92,6 @@ def retrieve_compound_commands(compound_command_name):
             commands_list.append(commands)
 
     return commands_list
-
 
 def delete_compound_command(compound_command_id):
     filename = "compound_command_" + str(compound_command_id)
@@ -118,3 +116,6 @@ if __name__ == '__main__':
 
     elif sys.argv[1] == 'ncompound':
         save_compound_command(sys.argv[2])
+
+    elif sys.argv[1] == 'dcompound':
+        delete_compound_command(sys.argv[2])

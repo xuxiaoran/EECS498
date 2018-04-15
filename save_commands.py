@@ -4,6 +4,7 @@ import os, os.path
 import sys
 import shutil
 import sqlite3
+import webbrowser
 
 def output(msg):
     print(msg.encode('unicode-escape'))
@@ -50,12 +51,14 @@ def delete_command(command_id):
 
 # Edits the command with command_id to be input_string
 def edit_command(command_id, input_string):
+    #webbrowser.open('https://www.google.com/'+str(command_id)+ '+' + input_string)
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()
-    edit_command = "UPDATE commands SET command = " + str(input_string) + " WHERE cid = " + int(command_id)
+    edit_command = "UPDATE commands SET command = \"" + input_string + "\" WHERE cid = " + str(command_id)
     db.execute(edit_command)
     conn.commit()
     conn.close()
+
 
 
 # Saves compound commands
@@ -75,7 +78,6 @@ def save_compound_command(commands_list):
     command_file.writelines(commands_list)
     command_file.close()
 
-
 # Returns a list of lists of commands. The first thing in each list of commands is the id for that compound command
 def retrieve_compound_commands(compound_command_name):
     commands_list = []
@@ -90,7 +92,6 @@ def retrieve_compound_commands(compound_command_name):
 
     return commands_list
 
-
 def delete_compound_command(compound_command_id):
     filename = "compound_command_" + str(compound_command_id)
     os.remove(filename)
@@ -99,7 +100,21 @@ def delete_compound_command(compound_command_id):
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         retrieve_commands()
+
     elif sys.argv[1] == 'add':
         save_command(sys.argv[2])
+
     elif sys.argv[1] == 'delete':
         delete_command(sys.argv[2])
+
+    elif sys.argv[1] == 'edit':
+        edit_command(sys.argv[2], sys.argv[3])
+
+    elif sys.argv[1] == 'rcompound':
+        retrieve_compound_commands()
+
+    elif sys.argv[1] == 'ncompound':
+        save_compound_command(sys.argv[2])
+
+    elif sys.argv[1] == 'dcompound':
+        delete_compound_command(sys.argv[2])

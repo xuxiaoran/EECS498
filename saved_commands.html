@@ -1,39 +1,21 @@
 <template class="task-template">
-  <section id="saved-section" class="section js-section u-category-green">
+  <section id="saved-section" class="section js-section u-category-blue">
     <header class="section-header">
-      <header class="section-wrapper">
+      <div class="section-wrapper">
         <h1>
           <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
           Saved Commands
         </h1>
-      </header>
 
-      <div class="demo">
-        <div class="demo-wrapper">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-hover" id="commands">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <input type="text" class="form-control" id="new" placeholder="Enter new command">
-                          </div>
-                        </td>
-                        <td>
-                          <button type="submit" id="add" class="btn btn-block btn-primary"> Add </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+        <p>Tutorial stuff goes here </p>
+
+          <div class="demo-controls">
+            <input class="demo-input" id="new" aria-label="Enter new command" placeholder="Enter new command."></input>
+            <button class="demo-button" id="add">Add</button>
           </div>
       </div>
     </header>
-
+    
     <script type="text/javascript">
       require('./commands')
     </script>

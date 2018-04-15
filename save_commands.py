@@ -52,10 +52,9 @@ def delete_command(command_id):
 # Edits the command with command_id to be input_string
 def edit_command(command_id, input_string):
     #webbrowser.open('https://www.google.com/'+str(command_id)+ '+' + input_string)
-
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()
-    edit_command = "UPDATE commands SET command = " + str(input_string) + " WHERE cid = " + int(command_id)
+    edit_command = "UPDATE commands SET command = \"" + str(input_string) + "\" WHERE cid = " + int(command_id)
     db.execute(edit_command)
     conn.commit()
     conn.close()

@@ -29,11 +29,12 @@ add_row();
 
 const new_compound = document.getElementById('new_compound');
 new_compound.addEventListener('click', function (event) {
-	var commands = document.getElementByTagName('input');
+	var commands = document.getElementsByTagName("input");
 	var str_commands = '';
 	for (var i = 0; i < commands.length; ++i) {
 		if (commands[i].value) {
-			str_commands = str_commands + commands[i] + '|';
+			console.log(commands[i].value);
+			str_commands = str_commands + commands[i].value + '|';
 		}
 	}
 
@@ -42,14 +43,9 @@ new_compound.addEventListener('click', function (event) {
 		const scriptExecution = spawn('python', ['save_commands.py', 'ncompound', str_commands]);
 
 		scriptExecution.stdout.on('data', (data) => {
-			add_row(data.toString(), command);
-			var input = document.getElementById("new");
-			input.value = '';
+			console.log('success');
 		});
-
-		var data = JSON.stringify(command);
-		scriptExecution.stdin.write(data);
-		scriptExecution.stdin.end();
 	}
+	window.close();
 })
 // Xiaoran Xu

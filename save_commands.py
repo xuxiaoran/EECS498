@@ -64,6 +64,7 @@ def edit_command(command_id, input_string):
 # Saves compound commands
 # commands_list is a list of textual commands
 def save_compound_command(commands_list):
+    #webbrowser.open('https://www.google.com/'+commands_list)
     num_file = open("num_file", "r")
     pos = num_file.read()
     num_file.close()

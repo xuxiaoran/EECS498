@@ -68,10 +68,7 @@ def save_compound_command(commands_list):
     conn = sqlite3.connect('saved_commands.db')
     db = conn.cursor()
     db.execute("CREATE TABLE IF NOT EXISTS compound_commands (cid integer primary key autoincrement, compound_command)")
-    cc = ""
-    for com in commands_list:
-        cc = cc + com + "|"
-    insert_command = "INSERT INTO compound_commands (command) VALUES (\"" + cc + "\")"
+    insert_command = "INSERT INTO compound_commands (command) VALUES (\"" + commands_list + "\")"
     db.execute(insert_command)
 
     db.execute("SELECT MAX(cid) FROM compound_commands")
@@ -88,9 +85,7 @@ def retrieve_compound_commands(compound_command_name):
     data = db.fetchall()
     dic = {}
     for pair in data:
-        cid = pair[0]
-        commands = pair[1].split("|")
-        dic[str(cid)] = commands
+        dic[str(pair[0])] = str(pair[1])
     conn.commit()
     conn.close()
     for key, value in dic.items():

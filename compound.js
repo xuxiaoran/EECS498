@@ -1,31 +1,112 @@
 const shell = require('electron').shell;
 
-function add_row(){
-	const new_tr = document.createElement('tr');
+function add_new_row(){
 
-	const new_td = document.createElement('td');
-	const second_td = document.createElement('td');
-	
-	const new_cmd = document.createElement('input');
-	new_cmd.className = "form-control";
+	const demo_control = document.createElement('div');
+	demo_control.className = "demo-controls";
 
 	const add_btn = document.createElement('button');
-	add_btn.className = "btn btn-info";
-	add_btn.innerHTML = "Add";
+	add_btn.className = "demo-button";
+	add_btn.innerHTML = 'Add';
 
 	add_btn.onclick = function (){
+		const delete_btn = document.createElement('button');
+		delete_btn.className = "demo-button";
+		delete_btn.innerHTML = "Delete";
+		delete_btn.onclick = function (){
+			const parent = delete_btn.parentNode;
+			parent.parentNode.removeChild(parent);
+		}
+		add_btn.parentNode.appendChild(delete_btn);
 		add_btn.parentNode.removeChild(add_btn);
-		add_row();
+		add_new_row();
 	}
 
-	new_td.appendChild(new_cmd);
-	second_td.appendChild(add_btn);
-	new_tr.appendChild(new_td);
-	new_tr.appendChild(second_td);
-	$('#commands').append(new_tr);
+	const input = document.createElement('input');
+	input.className = "demo-input";
+	input.placeholder = "Enter a command";
+
+	demo_control.appendChild(input);
+	demo_control.appendChild(add_btn);
+	$('#compounds').append(demo_control);
 }
 
-add_row();
+//to display
+function add_row(id, cmd){
+	const new_demo = document.createElement('div');
+	new_demo.className = "demo";
+
+	const new_row = document.createElement('div');
+	new_row.id = "compound_id_" + id;
+	new_row.className = "demo-wrapper";
+
+	const btn_run = document.createElement("button");
+	btn_run.className = 'demo-button';
+	btn_run.innerHTML = 'Run';
+	btn_run.onclick = function () {
+		const child_delete = require('child_process');
+		const exec = child_delete.spawn('python', ['forwarding_file.py', cmd]);
+		exec.stdout.on('data', (data) => {
+            console.log(String.fromCharCode.apply(null, data));
+          });
+	}
+
+	const temp_div = document.createElement('div');
+	temp_div.className = "demo-meta u-avoid-clicks";
+	temp_div.innerHTML = "Click to Edit or Delete";
+
+	const demo_box = document.createElement('div');
+	demo_box.className = "demo-box";
+
+	const demo_control = document.createElement('div');
+	demo_control.className = "demo-controls";
+
+	const btn_delete = document.createElement('button');
+	btn_delete.type = 'submit';
+	btn_delete.id = id;
+	btn_delete.className = 'demo-button u-category-pink';
+	btn_delete.innerHTML = 'Delete';
+
+	//delete command
+	btn_delete.onclick = function(){
+		const child_delete = require('child_process');
+		const exec = child_delete.spawn('python', ['save_commands.py', 'dcompound', id]);
+		const row = document.getElementById('row_id_'+id);
+		row.parentNode.removeChild(row);
+	}
+
+	const input = document.createElement('input');
+	input.className = "demo-input";
+	input.id = 'update_' + id;
+	input.placeholder = cmd;
+
+	const btn_update = document.createElement('button');
+	btn_update.type = 'submit';
+	btn_update.className = "demo-button u-category-green";
+	btn_update.innerHTML = "Update";
+
+	demo_control.appendChild(btn_run);
+	demo_control.appendChild(input);
+	demo_control.appendChild(btn_delete);
+	new_row.appendChild(demo_control);
+	new_demo.appendChild(new_row);
+	$('#compound-section').append(new_demo);
+}
+
+
+//retrieve commands
+const child_read = require('child_process');
+const exec = child_read.spawn('python', ['save_commands.py', 'rcompound']);
+exec.stdout.on('data', (data) => {
+	const lines = data.toString().replace(/\r/g, '').split('\n');
+	console.log(lines);
+	for (let i = 0; i < lines.length-1; i++) {
+		var content = lines[i].split('%');
+		add_row(content[0].toString(), content[1]);
+	}
+})
+
+add_new_row();
 
 const new_compound = document.getElementById('new_compound');
 new_compound.addEventListener('click', function (event) {
@@ -33,7 +114,6 @@ new_compound.addEventListener('click', function (event) {
 	var str_commands = '';
 	for (var i = 0; i < commands.length; ++i) {
 		if (commands[i].value) {
-			console.log(commands[i].value);
 			str_commands = str_commands + commands[i].value + '|';
 		}
 	}
@@ -43,9 +123,13 @@ new_compound.addEventListener('click', function (event) {
 		const scriptExecution = spawn('python', ['save_commands.py', 'ncompound', str_commands]);
 
 		scriptExecution.stdout.on('data', (data) => {
-			console.log('success');
+			add_row(data.toString(), str_commands);
 		});
 	}
-	window.close();
+	
+	const to_delete = document.getElementById('compounds');
+	to_delete.innerHTML = "";
+	add_new_row();
 })
+
 // Xiaoran Xu

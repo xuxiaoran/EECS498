@@ -10,18 +10,6 @@ function add_row(id, cmd){
 	new_row.id = "row_id_" + id;
 	new_row.className = "demo-wrapper";
 
-	const btn_run = document.createElement("button");
-	btn_run.type = "submit";
-	btn_run.className = 'demo-button';
-	btn_run.innerHTML = 'Run';
-	btn_run.onclick = function () {
-		const child_delete = require('child_process');
-		const exec = child_delete.spawn('python', ['forwarding_file.py', cmd]);
-		exec.stdout.on('data', (data) => {
-            console.log(String.fromCharCode.apply(null, data));
-          });
-	}
-
 	const temp_div = document.createElement('div');
 	temp_div.className = "demo-meta u-avoid-clicks";
 	temp_div.innerHTML = "Click to Edit or Delete";
@@ -82,9 +70,13 @@ function add_row(id, cmd){
 	new_row.appendChild(demo_control);
 	new_demo.appendChild(new_row);
 	$('#saved-section').append(new_demo);
+
+	const div = document.createElement('div');
+
+	$('#saved-section').append(div);
 }
 
-//retrieve commands
+//retrieve contacts
 const child_read = require('child_process');
 const exec = child_read.spawn('python', ['save_commands.py']);
 exec.stdout.on('data', (data) => {
@@ -93,6 +85,7 @@ exec.stdout.on('data', (data) => {
 	for (let i = 0; i < lines.length-1; i++) {
 		var content = lines[i].split('%');
 		add_row(content[0].toString(), content[1]);
+		console.log(content);
 	}
 })
 

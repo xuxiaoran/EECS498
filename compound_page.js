@@ -1,13 +1,13 @@
 const shell = require('electron').shell;
-//retrieve commands
 
+//retrieve commands
 function add_row(id, cmd){
 
 	const new_demo = document.createElement('div');
 	new_demo.className = "demo";
 
 	const new_row = document.createElement('div');
-	new_row.id = "row_id_" + id;
+	new_row.id = "compound_id_" + id;
 	new_row.className = "demo-wrapper";
 
 	const btn_run = document.createElement("button");
@@ -82,6 +82,10 @@ function add_row(id, cmd){
 	new_row.appendChild(demo_control);
 	new_demo.appendChild(new_row);
 	$('#saved-section').append(new_demo);
+
+	const div = document.createElement('div');
+
+	$('#saved-section').append(div);
 }
 
 //retrieve commands
@@ -93,6 +97,7 @@ exec.stdout.on('data', (data) => {
 	for (let i = 0; i < lines.length-1; i++) {
 		var content = lines[i].split('%');
 		add_row(content[0].toString(), content[1]);
+		console.log(content);
 	}
 })
 

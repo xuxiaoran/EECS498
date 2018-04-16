@@ -71,19 +71,9 @@ function add_row(id, cmd){
 	btn_delete.onclick = function(){
 		const child_delete = require('child_process');
 		const exec = child_delete.spawn('python', ['save_commands.py', 'dcompound', id]);
-		const row = document.getElementById('row_id_'+id);
+		const row = document.getElementById('compound_id_'+id);
 		row.parentNode.removeChild(row);
 	}
-
-	const input = document.createElement('input');
-	input.className = "demo-input";
-	input.id = 'update_' + id;
-	input.placeholder = cmd;
-
-	const btn_update = document.createElement('button');
-	btn_update.type = 'submit';
-	btn_update.className = "demo-button u-category-green";
-	btn_update.innerHTML = "Update";
 
 	demo_control.appendChild(btn_run);
 	demo_control.appendChild(input);

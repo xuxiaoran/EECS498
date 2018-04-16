@@ -60,7 +60,6 @@ def edit_command(command_id, input_string):
     conn.close()
 
 
-
 # Saves compound commands
 # commands_list is a list of textual commands
 def save_compound_command(commands_list):

@@ -1,8 +1,9 @@
 const shell = require('electron').shell;
 const new_command = document.getElementById('call');
+
 new_command.addEventListener('click', function (event) {
   const spawn = require('child_process').spawn;
-  const scriptExecution = spawn("python", ["help.py"]);
+  const scriptExecution = spawn("python3", ["help.py"]);
   scriptExecution.stdout.on('data', (data) => {
     console.log('success');
   });

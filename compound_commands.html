@@ -3,33 +3,22 @@
     <header class="section-header">
       <div class="section-wrapper">
         <h1>
-          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
           Compound Commands
         </h1>
 
         <p>Tutorial stuff goes here </p>
 
+          <div class="demo" id="compounds"></div>
+
           <div class="demo-controls">
-            <button class="demo-button" id="add_compound">Add New Compound Command</button>
+            <button class="demo-button" id="new_compound"> Finish </button>
           </div>
       </div>
     </header>
     
     <script type="text/javascript">
-      const BrowserWindow = require('electron').remote.BrowserWindow
-      const path = require('path')
-
-      const newWindowBtn = document.getElementById('add_compound')
-
-      newWindowBtn.addEventListener('click', function (event) {
-        const modalPath = path.join('file://', __dirname, 'select_commands.html')
-        let win = new BrowserWindow({ width: 700, height: 600 })
-        win.on('close', function () { win = null })
-        win.loadURL(modalPath)
-        win.show()
-
-        
-      })
+      require('./compound')
     </script>
   </section>
 </template>

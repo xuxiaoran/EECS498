@@ -26,13 +26,13 @@ for (var i = 0; i < keys.length; ++i) {
 
 const run_btn = document.getElementById('run');
 run_btn.addEventListener('click', function (event) {
-  var command = document.getElementById("command").value;
+  var command = document.getElementById('command');
   const spawn = require('child_process').spawn;
-  const scriptExecution = spawn("python", ["main.py"]);
+  const scriptExecution = spawn("python", ["main.py", command.value]);
 
   // Handle normal output
   scriptExecution.stdout.on('data', (data) => {
-    console.log(String.fromCharCode.apply(null, data));
+    command.value = '';
   });
 
   // Write data (remember to send only strings or numbers, otherwhise python wont understand)
@@ -41,5 +41,5 @@ run_btn.addEventListener('click', function (event) {
   // End data write
   scriptExecution.stdin.end();
 
-  command.innerHTML = "";
-  })
+  command.value = '';
+})

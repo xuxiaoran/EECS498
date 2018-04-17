@@ -1,34 +1,27 @@
-<meta charset="utf-8">
-<style>
-body {
-  font-family: system, -apple-system, '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
-  color: #fff;
-  background-color: #8aba87;
-  text-align: center;
-  font-size: 40px;
-}
+<template class="task-template">
+  <section id="emergency-section" class="section js-section u-category-pink">
+    <header class="section-header">
+      <div class="section-wrapper">
+        <h1>
+          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
+          Emergency Help
+        </h1>
+        <br>
+        <p>Click the button below to send a help message to contacts.</p>
+      </div>
+    </header>
 
-h2 {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    <div class="demo">
+      <div class="demo-wrapper">
+          <div class="demo-controls">
+            <button class="demo-button" id="call">Call Help!</button>
+          </div>
+        </div>
+    </div>
 
-#close {
-  color: white;
-  opacity: 0.7;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  text-decoration: none;
-}
+  <script type="text/javascript">
+    require('./call')
+  </script>
 
-</style>
-
-<h2>Hello World!</h2>
-<a id="close" href="javascript:window.close()">关闭这个窗口</a>
+</section>
+</template>

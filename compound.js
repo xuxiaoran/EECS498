@@ -68,10 +68,9 @@ function add_row(id, cmd){
 		row.parentNode.removeChild(row);
 	}
 
-	const input = document.createElement('input');
-	input.className = "demo-input";
-	input.id = 'update_' + id;
-	input.placeholder = cmd;
+	const input = document.createElement('span');
+	input.className = "demo-response";
+	input.innerHTML = cmd;
 
 	const btn_update = document.createElement('button');
 	btn_update.type = 'submit';

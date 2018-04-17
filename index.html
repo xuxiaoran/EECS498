@@ -18,18 +18,16 @@
   <link rel="import" href="command.html">
   <link rel="import" href="saved_commands.html">
   <link rel="import" href="compound_commands.html">
-  <!--link rel="import" href="emergency.html"-->
+  <link rel="import" href="emergency.html">
 
   <title>Better Butler</title>
 
 </head>
 
 <body>
-  
   <nav class="nav js-nav">
     <header class="nav-header">
-      <h2 class="nav-title">Better Butler<button type="submit" id="help" class="btn u-category-pink" style="float:right;"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
-        Emergency!</button></h2>
+      <h2 class="nav-title">Better Butler</h2>
     </header>
 
     <div class="nav-item">
@@ -52,8 +50,8 @@
 
     <div class="nav-item">
       <h5 class="nav-category"></h5>
-        <button type="button" id="button-states" data-section="contact" class="nav-button u-category-green"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
-        Contact List</button>
+        <button type="button" id="button-states" data-section="emergency" class="nav-button u-category-pink"><svg class="nav-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
+        Emergency Help!!</button>
     </div>
 
     <footer class="nav-footer">
@@ -69,17 +67,6 @@
     require('./assets/demo-btns')
     require('./assets/code-blocks')
     require('./assets/normalize-shortcuts')
-
-    const shell = require('electron').shell;
-    const exLinksBtn = document.getElementById('help');
-    exLinksBtn.addEventListener('click', function (event) {
-        const spawn = require('child_process').spawn;
-        const scriptExecution = spawn("python", ["help.py"]);
-          // Handle normal output
-          scriptExecution.stdout.on('data', (data) => {
-            console.log("called for help");
-          });
-        })
   </script>
 </body>
 </html>

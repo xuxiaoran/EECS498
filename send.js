@@ -40,4 +40,6 @@ run_btn.addEventListener('click', function (event) {
   scriptExecution.stdin.write(data);
   // End data write
   scriptExecution.stdin.end();
+
+  command.innerHTML = "";
   })

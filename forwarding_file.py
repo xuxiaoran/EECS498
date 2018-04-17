@@ -40,4 +40,4 @@ def send_command(input_command):
         os.system("afplay response_audio.mp3")
 
 if __name__ == '__main__':
-    main()
+    send_command(sys.argv[1])

@@ -28,7 +28,7 @@ const run_btn = document.getElementById('run');
 run_btn.addEventListener('click', function (event) {
   var command = document.getElementById('command');
   const spawn = require('child_process').spawn;
-  const scriptExecution = spawn("python", ["main.py", command.value]);
+  const scriptExecution = spawn("python", ['forwarding_file.py', command.value]);
 
   // Handle normal output
   scriptExecution.stdout.on('data', (data) => {

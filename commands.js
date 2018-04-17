@@ -22,21 +22,13 @@ function add_row(id, cmd){
           });
 	}
 
-	const temp_div = document.createElement('div');
-	temp_div.className = "demo-meta u-avoid-clicks";
-	temp_div.innerHTML = "Click to Edit or Delete";
-
-	const demo_box = document.createElement('div');
-	demo_box.className = "demo-box";
-
 	const demo_control = document.createElement('div');
 	demo_control.className = "demo-controls";
 
 	const btn_delete = document.createElement('button');
-	btn_delete.type = 'submit';
 	btn_delete.id = id;
-	btn_delete.className = 'demo-button u-category-pink';
 	btn_delete.innerHTML = 'Delete';
+	btn_delete.className = 'demo-button';
 
 	//delete command
 	btn_delete.onclick = function(){
@@ -53,7 +45,7 @@ function add_row(id, cmd){
 
 	const btn_update = document.createElement('button');
 	btn_update.type = 'submit';
-	btn_update.className = "demo-button u-category-green";
+	btn_update.className = "demo-button";
 	btn_update.innerHTML = "Update";
 
 	btn_update.onclick = function(){

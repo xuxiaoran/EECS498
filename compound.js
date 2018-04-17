@@ -51,13 +51,6 @@ function add_row(id, cmd){
           });
 	}
 
-	const temp_div = document.createElement('div');
-	temp_div.className = "demo-meta u-avoid-clicks";
-	temp_div.innerHTML = "Click to Edit or Delete";
-
-	const demo_box = document.createElement('div');
-	demo_box.className = "demo-box";
-
 	const demo_control = document.createElement('div');
 	demo_control.className = "demo-controls";
 
@@ -74,6 +67,16 @@ function add_row(id, cmd){
 		const row = document.getElementById('compound_id_'+id);
 		row.parentNode.removeChild(row);
 	}
+
+	const input = document.createElement('input');
+	input.className = "demo-input";
+	input.id = 'update_' + id;
+	input.placeholder = cmd;
+
+	const btn_update = document.createElement('button');
+	btn_update.type = 'submit';
+	btn_update.className = "demo-button u-category-green";
+	btn_update.innerHTML = "Update";
 
 	demo_control.appendChild(btn_run);
 	demo_control.appendChild(input);
